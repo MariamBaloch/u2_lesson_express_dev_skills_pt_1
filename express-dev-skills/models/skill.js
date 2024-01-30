@@ -14,4 +14,20 @@ const getOne = (id) => {
   })
   return skill
 }
-module.exports = { getAll, getOne }
+
+const create = (skill) => {
+  skill.id = Date.now() % 100000
+  skill.learned = false
+  skills.push(skill)
+}
+
+const deleteSkill = (id) => {
+  const index = skills.findIndex((skill) => skill.id === parseInt(id))
+  skills.splice(index, 1)
+}
+
+const updateOne = (id, updatedSkill) => {
+  const skilltoUpdate = skills.find((skill) => skill.id === parseInt(id))
+  skilltoUpdate.skillName = updatedSkill
+}
+module.exports = { getAll, getOne, create, deleteSkill, updateOne }

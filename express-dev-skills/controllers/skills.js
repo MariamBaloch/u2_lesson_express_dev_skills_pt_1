@@ -12,5 +12,25 @@ const show = (req, res) => {
     skill
   })
 }
-
-module.exports = { index, show }
+const add = (req, res) => {
+  res.render('skills/add')
+}
+const create = (req, res) => {
+  Skill.create(req.body)
+  res.redirect('/skills')
+}
+const deleteSkill = (req, res) => {
+  Skill.deleteSkill(req.params.id)
+  res.redirect('/skills')
+}
+const edit = (req, res) => {
+  const skill = Skill.getOne(req.params.id)
+  res.render('skills/edit', { skill })
+}
+const update = (req, res) => {
+  const skillId = req.params.id
+  const updatedSkill = req.body.skillName
+  Skill.updateOne(skillId, updatedSkill)
+  res.redirect('/skills')
+}
+module.exports = { index, show, add, create, deleteSkill, edit, update }
